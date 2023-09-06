@@ -1,4 +1,4 @@
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,600&display=swap');
 
 *{
     margin: 0;
@@ -21,6 +21,19 @@ body{
     background: transparent;
     box-shadow: 0px 3px 15px rgba(113,115,119,0.5);
 
+
+}
+
+h1{
+    color: antiquewhite;
+}
+h3{
+    color: aqua;
+}
+.hthree{
+    position:absolute;
+    top:0;
+    left:0;
 
 }
 input{
