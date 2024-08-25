@@ -2,41 +2,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Calculator</title>
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Make sure the container is centered vertically */
+            margin: 0;
+        }
+
+        #bttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: rgb(53, 51, 48);
+            align-items: center;
+            border-radius: 10px;
+            width: 320px;
+            padding: 20px;
+        }
+
+        #bttons form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #bttons .display input {
+            border-radius: 10px;
+            width: 280px;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: white;
+            border: none;
+            color: black;
+        }
+
+        #bttons form input[type="button"] {
+            border-radius: 10px;
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            margin: 5px;
+            background-color: #e0e0e0;
+            border: none;
+            cursor: pointer;
+        }
+
+        #bttons form input[type="button"]:hover {
+            background-color: #d0d0d0;
+        }
+
+        #bttons form div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form .result {
+           
+           font-weight: 900;
+        }
+        .operators {
+            font-weight: 900;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="hthree"><h1>Calculator</h1> <h3>(using HTML,CSS and JS)</h3></div>
-    <div class="calculator">
-        <input type="'text" placeholder="0" id="inputbox"><div>
-            <button class="ac">AC</button>
-            <button>DEL</button>
-            <button>%</button>
-            <button class="operators">/</button>
-        </div>
-        <div>
-            <button class="no">7</button>
-            <button class="no">8</button>
-            <button class="no">9</button>
-            <button class="operators" >*</button></div>
+    <div id="bttons">
+        <form name="calculator">
+            <div class="display">
+                <input class="input" type="text" name="display" readonly>
+            </div>
             <div>
-            <button class="no">4</button>
-            <button class="no">5</button>
-            <button class="no">6</button>
-            <button class="operators">-</button></div>
+                <input type="button" value="9" onclick="appendValue('9')">
+                <input type="button" value="8" onclick="appendValue('8')">
+                <input type="button" value="7" onclick="appendValue('7')">
+                <input class="operators" type="button" value="/" onclick="appendValue('/')">
+            </div>
             <div>
-                <button class="no">1</button>
-                <button class="no">2</button>
-                <button class="no">3</button>
-                <button class="operators">+</button></div>
-                <div>
-                    <button class="no">00</button>
-                    <button class="no">0</button>
-                    <button>.</button>
-                    <button class="equalbutton">=</button></div>
-        </div>
-            
+                <input type="button" value="4" onclick="appendValue('4')">
+                <input type="button" value="5" onclick="appendValue('5')">
+                <input type="button" value="6" onclick="appendValue('6')">
+                <input class="operators" type="button" value="*" onclick="appendValue('*')">
+            </div>
+            <div>
+                <input type="button" value="1" onclick="appendValue('1')">
+                <input type="button" value="2" onclick="appendValue('2')">
+                <input type="button" value="3" onclick="appendValue('3')">
+                <input class="operators" type="button" value="-" onclick="appendValue('-')">
+            </div>
+            <div>
+                <input type="button" value="AC" onclick="clearDisplay()">
+                <input type="button" value="0" onclick="appendValue('0')">
+                <input class="result" type="button" value="=" onclick="calculateResult()">
+                <input class="operators" type="button" value="+" onclick="appendValue('+')">
+            </div>
+        </form>
     </div>
-    <script src="script.js"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
+<script>
+    // Function to append values to the display
+    function appendValue(value) {
+        document.calculator.display.value += value;
+    }
+
+    // Function to clear the display
+    function clearDisplay() {
+        document.calculator.display.value = '';
+    }
+
+    // Function to calculate the result
+    function calculateResult() {
+        try {
+            document.calculator.display.value = eval(document.calculator.display.value);
+        } catch (e) {
+            document.calculator.display.value = 'Error';
+        }
+    }
+</script>
 </html>
